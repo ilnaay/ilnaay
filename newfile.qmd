@@ -23,5 +23,6 @@ print("hello")
 install.packages("usethis")
 library(usethis)
 use_github(private=TRUE)
+install.packages(c("gh", "usethis", "gitcreds", "cli", "rlang"))
 # adding this sign allows to insert a comment within a code block. 
 ```

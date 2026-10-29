@@ -3,10 +3,20 @@ title: Example document
 format: docx
 ---
 
+
+# Introduction
 This is an example Quarto document
+
+
+# Setup
+
+Let's start the first coding project.
+
+
 
 
 ```{r}
 print("hello")
 getwd()
+# adding this sign allows to insert a comment within a code block. 
 ```

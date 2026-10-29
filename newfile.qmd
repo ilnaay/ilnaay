@@ -18,6 +18,7 @@ print("hello")
 ```
 
 ```{r}
+#| eval: FALSE
 #print("hello")
 #getwd()
 install.packages("usethis")

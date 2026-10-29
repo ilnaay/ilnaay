@@ -1,0 +1,12 @@
+---
+title: Example document
+format: docx
+---
+
+This is an example Quarto document
+
+
+```{r}
+print("hello")
+getwd()
+```

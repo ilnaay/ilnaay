@@ -13,10 +13,15 @@ This is an example Quarto document
 Let's start the first coding project.
 
 
-
-
 ```{r}
 print("hello")
-getwd()
+```
+
+```{r}
+#print("hello")
+#getwd()
+install.packages("usethis")
+library(usethis)
+use_github(private=TRUE)
 # adding this sign allows to insert a comment within a code block. 
 ```

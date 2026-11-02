@@ -35,4 +35,6 @@ install.packages(c("gh", "usethis", "gitcreds", "cli", "rlang"))
 # git reset 3329b526cfff48c20cf45fabe7e0a129c27a8216
 # git reset -hard 3329b526cfff48c20cf45fabe7e0a129c27a8216
 # git branch Week1
+# quarto render Quartotest.qmd
+# Heading starts with #, subheading starts with ##
 ```

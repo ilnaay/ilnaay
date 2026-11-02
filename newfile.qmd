@@ -26,4 +26,13 @@ library(usethis)
 use_github(private=TRUE)
 install.packages(c("gh", "usethis", "gitcreds", "cli", "rlang"))
 # adding this sign allows to insert a comment within a code block. 
+# git add
+# git commit -m "Adding..."
+# git pull
+# git push
+# git branch
+# git checkout main
+# git reset 3329b526cfff48c20cf45fabe7e0a129c27a8216
+# git reset -hard 3329b526cfff48c20cf45fabe7e0a129c27a8216
+# git branch Week1
 ```

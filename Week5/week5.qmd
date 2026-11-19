@@ -1,0 +1,174 @@
+---
+title: Week 5
+format: html
+---
+
+
+
+```{r}
+setwd("c:/Users/AYLOTTI/Documents/21 Cytometry/Rflow/Week5")
+#Folder <- file.path("course", "05_GatingSets", "data") # For testing
+Folder <- file.path("data") # for quarto rendering
+fcs_files <- list.files(Folder, pattern=".fcs", full.names=TRUE)
+fcs_files
+str(fcs_files)
+
+fcs_files[1]
+str(fcs_files[1])
+library(flowCore)
+
+
+flowFrame <- read.FCS(filename=fcs_files[1], truncate_max_range = FALSE, transformation = FALSE)
+flowFrame
+
+
+
+
+flowSet <- read.flowSet(files=fcs_files, truncate_max_range = FALSE, transformation = FALSE)
+flowSet
+
+
+class(flowSet)
+str(flowSet)
+
+
+object.size(flowFrame)
+install.packages("lobstr")
+library(lobstr)
+obj_size(flowSet)
+obj_size(flowFrame)
+mem_used()
+
+OperatingSystem <- Sys.info()[["sysname"]]
+
+if (OperatingSystem == "Windows") { # Windows
+  Memory <- ps::ps_system_memory()
+  message("Total GB ", round(Memory$total / 1024^3, 2))
+  message("Free GB ", round(Memory$free / 1024^3, 2))
+
+  } else if (OperatingSystem == "Darwin") { # MacOS
+    system("top -l 1 | grep PhysMem")
+
+  } else if (OperatingSystem == "Linux") { # Linux
+    system("free -h")
+
+  } else {message("A wild FreeBSD-User appears")}
+
+
+install.packages("ps") # CRAN
+library(ps)
+Memory <- ps::ps_system_memory()
+message("Total GB ", round(Memory$total / 1024^3, 2))
+message("Free GB ", round(Memory$free / 1024^3, 2))
+
+
+BiocManager::install("flowWorkspace") #Bioconductor
+library(flowWorkspace)
+
+cytoframe <- load_cytoframe_from_fcs(fcs_files[1], truncate_max_range = FALSE, transformation = FALSE)
+
+cytoframe
+class(cytoframe)
+
+load_cytoframe_from_fcs(fcs_files, truncate_max_range = FALSE, transformation = FALSE)
+
+
+cytoset <- load_cytoset_from_fcs(fcs_files, truncate_max_range = FALSE, transformation = FALSE)
+
+cytoset
+class(cytoset)
+str(cytoframe)
+str(cytoset)
+obj_size(cytoframe)
+obj_size(cytoset)
+obj_size(flowSet)
+obj_size(flowFrame)
+
+
+ConvertedToCytoframe <- flowFrame_to_cytoframe(flowFrame)
+ConvertedToCytoframe
+obj_size(ConvertedToCytoframe)
+
+ConvertedToFlowframe <- flowWorkspace::cytoframe_to_flowFrame(cytoframe)
+ConvertedToFlowframe
+obj_size(ConvertedToFlowframe)
+
+
+ConvertedToCytoset <- flowSet_to_cytoset(flowSet)
+ConvertedToCytoset
+obj_size(ConvertedToCytoset)
+
+
+ConvertedToFlowset <- cytoset_to_flowSet(flowSet)
+ConvertedToFlowset
+obj_size(ConvertedToFlowset)
+
+
+GatingSet1 <- GatingSet(flowSet)
+GatingSet1
+class(GatingSet1)
+
+GatingSet2 <- GatingSet(cytoset)
+GatingSet2
+
+class(GatingSet2)
+
+# BiocManager::install("CytoML") #Bioconductor
+library(CytoML)
+
+Folder
+
+FlowJoWsp <- list.files(path = Folder, pattern = ".wsp", full = TRUE)
+FlowJoWsp
+
+ThisWorkspace <- FlowJoWsp[stringr::str_detect(FlowJoWsp, "Opened")]
+ThisWorkspace
+
+ws <- open_flowjo_xml(ThisWorkspace)
+ws
+class(ws)
+
+gs <- flowjo_to_gatingset(ws=ws, name=1, path=Folder, additional.keys = "GROUPNAME")
+gs
+?flowjo_to_gatingset
+class(gs)
+
+
+system.time({
+    flowjo_to_gatingset(ws=ws, name=1, path=Folder, additional.keys = "GROUPNAME")
+})
+
+install.packages("bench")
+library(bench)
+
+mark(
+  Test <- flowjo_to_gatingset(ws=ws, name=1, path = Folder, additional.keys="GROUPNAME"),
+  iterations= 5
+  )
+
+
+###Gates
+
+plot(gs)
+
+gs_get_pop_paths(gs)
+
+Data <- gs_pop_get_count_fast(gs)
+head(Data,5)
+
+pData(gs)
+
+
+AlternateGS <- flowjo_to_gatingset(ws=ws, name=1, path = Folder,
+ additional.keys="GROUPNAME",
+ keywords=c("$DATE", "$CYT", "GROUPNAME"))
+pData(AlternateGS)
+
+packageVersion("ggplot2")
+packageVersion("ggcyto")
+
+
+
+
+ggcyto(gs[1], subset="root", aes(x="FSC-A", y="SSC-A")) + geom_hex(bins=100) 
+```

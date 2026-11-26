@@ -167,8 +167,20 @@ pData(AlternateGS)
 packageVersion("ggplot2")
 packageVersion("ggcyto")
 
-
+library(ggplot2)
+library(ggcyto)
 
 
 ggcyto(gs[1], subset="root", aes(x="FSC-A", y="SSC-A")) + geom_hex(bins=100) 
+
+
+ggcyto(gs[1], subset="CD4+", aes(x="FSC-A", y="SSC-A")) + geom_hex(bins=100) 
+
+ggcyto(gs[1], subset="CD8+", aes(x="IFNg", y="TNFa")) + geom_hex(bins=100) 
+
+ggcyto(gs[1], subset="CD8+", aes(x="BV750-A", y="PE-Dazzle594-A")) + geom_hex(bins=100) 
+
+ggcyto(gs[6], subset="Tcells", aes(x="CD4", y="CD8")) + geom_hex(bins=100)
+
+
 ```

@@ -1,0 +1,338 @@
+---
+title: Week2 work
+format: html
+---
+
+rm() - removes a variable
+
+```{r}
+hey <- "what"
+
+Fluorophores <- "FITC"
+str(Fluorophores)
+#The “chr” in front denotating that Fluorophores contains a character string.
+class(Fluorophores)
+Fluorophores <- 29
+str(Fluorophores)
+#Which returns “num”, ie. numeric.
+IsPerCPCy5AGoodFluorophore <- FALSE
+str(IsPerCPCy5AGoodFluorophore)
+#Which returns logi in front, denoting this variable contains a logical value.
+
+Fluorophores <- c("BV421", "FITC", "PE", "APC")
+str(Fluorophores)
+length(Fluorophores)
+Fluorophores[1]
+Fluorophores[3]
+Fluorophores[3:4]
+Fluorophores[c(1,4)]
+list.dirs(path=".", full.names=FALSE, recursive=FALSE)
+list.files()
+list.files(path="data", full.names=FALSE, recursive=FALSE)
+
+
+NewFolderLocation <- file.path("data", "target2")
+
+dir.create(path=NewFolderLocation)
+
+list.files(path="target", full.names=FALSE, recursive=FALSE)
+file.exists("target")
+file.exists("data")
+
+list.files(path="data/target", full.names=FALSE, recursive=FALSE)
+
+FolderLocation <- file.path("data", "target")
+FolderLocation
+
+list.files(path=FolderLocation, full.names=FALSE, recursive=FALSE)
+
+FolderLocation <- "data"
+ScreenshotFolder <- file.path(FolderLocation, "target")
+ScreenshotFolder
+
+list.files(path=ScreenshotFolder, full.names=FALSE, recursive=FALSE)
+
+list.files(path=ScreenshotFolder, pattern="ND050", full.names=FALSE, recursive=FALSE)
+list.files("data", full.names=FALSE, recursive=FALSE)
+
+files <- list.files("data", pattern=".fcs", full.names=FALSE, recursive=FALSE)
+files
+
+library(stringr)
+
+
+str_detect(files, "INF")
+files[str_detect(files, "INF")]
+
+Infants <- files[str_detect(files, "INF")]
+
+files_present <- list.files("data", full.names=TRUE, recursive=FALSE)
+files_present
+
+Infants <- files_present[str_detect(files_present, "INF")]
+# Variable Infants containing 4 .fcs file names
+
+file.copy(from=Infants, to=FolderTarget3)
+
+
+NeedCoffee <- FALSE
+
+if (NeedCoffee){
+    print("Take a break")
+}
+
+
+RowNumber <- 299
+2 + RowNumber > 300
+
+if (2 + RowNumber > 3){
+    print("Stop Iterating")
+}
+
+
+ItsRaining <- TRUE
+
+if (ItsRaining){print("Bring an Umbrella")}
+
+!ItsRaining
+
+if (!ItsRaining){print("Bring an Umbrella")}
+
+ItsRaining <- FALSE
+
+if (!ItsRaining){print("Bring Sunglasses")}
+
+
+
+files_present <- list.files("data", full.names=TRUE, recursive=FALSE)
+files_present
+
+
+FolderTarget3 <- file.path("data", "target3")
+dir.exists(FolderTarget3)
+
+if (!dir.exists(FolderTarget3)){
+    dir.create(FolderTarget3)
+}
+
+
+# Variable Infants containing 4 .fcs file names
+
+file.copy(from=Infants, to=FolderTarget3)
+
+
+getwd()
+
+
+basename(Infants)
+
+all_files_present <- list.files(full.names=TRUE, recursive=TRUE)
+all_files_present 
+
+
+
+rownames(installed.packages())
+
+#| eval: FALSE
+> rownames(installed.packages())
+  [1] "abind"                "actuar"               "ALL"                 
+  [4] "annotate"             "AnnotationDbi"        "AnnotationHub"       
+  [7] "ape"                  "aplot"                "askpass"             
+ [10] "assertthat"           "assorthead"           "babelgene"           
+ [13] "backports"            "base64enc"            "bayesm"              
+ [16] "bayesplot"            "bayestestR"           "bbmle"               
+ [19] "bdsmatrix"            "beachmat"             "beeswarm"            
+ [22] "BH"                   "bigD"                 "biglm"               
+ [25] "Biobase"              "BiocFileCache"        "BiocGenerics"        
+ [28] "BiocIO"               "BiocManager"          "BiocNeighbors"       
+ [31] "BiocParallel"         "BiocSingular"         "BiocVersion"         
+ [34] "biomaRt"              "Biostrings"           "bit"                 
+ [37] "bit64"                "bitops"               "blob"                
+ [40] "bluster"              "brew"                 "bridgesampling"      
+ [43] "brio"                 "brms"                 "Brobdingnag"         
+ [46] "broom"                "bslib"                "cachem"              
+ [49] "Cairo"                "callr"                "car"                 
+ [52] "carData"              "caret"                "caTools"             
+ [55] "cellranger"           "checkmate"            "circlize"            
+ [58] "classInt"             "cli"                  "clipr"               
+ [61] "clock"                "clue"                 "clusterProfiler"     
+ [64] "coda"                 "colorRamps"           "colorspace"          
+ [67] "colourpicker"         "colourvalues"         "commonmark"          
+ [70] "ComplexHeatmap"       "compositions"         "concaveman"          
+ [73] "conflicted"           "ConsensusClusterPlus" "corrplot"            
+ [76] "cowplot"              "cowsay"               "cpp11"               
+ [79] "crayon"               "credentials"          "crosstalk"           
+ [82] "curl"                 "cyCombine"            "cytolib"             
+ [85] "CytoML"               "CytoNorm"             "data.table"          
+ [88] "datawizard"           "DBI"                  "dbplyr"              
+ [91] "DelayedArray"         "DelayedMatrixStats"   "deldir"              
+ [94] "DEoptimR"             "Deriv"                "desc"                
+ [97] "devtools"             "diagram"              "diffobj"             
+[100] "digest"               "distributional"       "doBy"                
+[103] "doParallel"           "doRNG"                "DOSE"                
+[106] "dotCall64"            "downlit"              "dplyr"               
+[109] "dqrng"                "dtplyr"               "e1071"               
+[112] "edgeR"                "ellipsis"             "emdist"              
+[115] "emmeans"              "enrichplot"           "estimability"        
+[118] "evaluate"             "ExperimentHub"        "expint"              
+[121] "fansi"                "farver"               "fastDummies"         
+[124] "fastGHQuad"           "fastmap"              "fastmatch"           
+[127] "fgsea"                "figpatch"             "filelock"            
+[130] "fitdistrplus"         "flowClust"            "flowCore"            
+[133] "flowGate"             "flowMagic"            "FlowSOM"             
+[136] "flowSpectrum"         "flowViz"              "flowWorkspace"       
+[139] "FNN"                  "fontawesome"          "forcats"             
+[142] "foreach"              "forecast"             "formatR"             
+[145] "Formula"              "fracdiff"             "fs"                  
+[148] "futile.logger"        "futile.options"       "future"              
+[151] "future.apply"         "gargle"               "genefilter"          
+[154] "generics"             "GenomeInfoDb"         "GenomeInfoDbData"    
+[157] "GenomicAlignments"    "GenomicRanges"        "GEOquery"            
+[160] "gert"                 "GetoptLong"           "ggalluvial"          
+[163] "GGally"               "ggarchery"            "ggbeeswarm"          
+[166] "ggcyto"               "ggExtra"              "ggforce"             
+[169] "ggfun"                "ggnewscale"           "ggplot2"             
+[172] "ggplotify"            "ggpubr"               "ggrastr"             
+[175] "ggrepel"              "ggridges"             "ggsci"               
+[178] "ggsignif"             "ggstats"              "ggtangle"            
+[181] "ggtern"               "ggtree"               "gh"                  
+[184] "ghibli"               "gitcreds"             "glmGamPoi"           
+[187] "GlobalOptions"        "globals"              "glue"                
+[190] "GO.db"                "goftest"              "googledrive"         
+[193] "googlesheets4"        "GOSemSim"             "gower"               
+[196] "gplots"               "graph"                "gridExtra"           
+[199] "gridGraphics"         "gson"                 "gt"                  
+[202] "gtable"               "gtools"               "h5mread"             
+[205] "hardhat"              "harmony"              "haven"               
+[208] "HDF5Array"            "hdf5r"                "here"                
+[211] "hexbin"               "highr"                "Hmisc"               
+[214] "hms"                  "htmlTable"            "htmltools"           
+[217] "htmlwidgets"          "httpuv"               "httr"                
+[220] "httr2"                "ica"                  "IDPmisc"             
+[223] "ids"                  "igraph"               "ini"                 
+[226] "inline"               "insight"              "interp"              
+[229] "ipred"                "IRanges"              "irlba"               
+[232] "isoband"              "iterators"            "jpeg"                
+[235] "jquerylib"            "jsonlite"             "juicyjuice"          
+[238] "KEGGREST"             "knitr"                "kohonen"             
+[241] "labeling"             "lambda.r"             "later"               
+[244] "latex2exp"            "latticeExtra"         "lava"                
+[247] "lazyeval"             "leidenbase"           "lifecycle"           
+[250] "limma"                "listenv"              "litedown"            
+[253] "lme4"                 "lmerTest"             "lmtest"              
+[256] "locfit"               "logspline"            "loo"                 
+[259] "lpSolve"              "lsa"                  "lubridate"           
+[262] "magick"               "magrittr"             "markdown"            
+[265] "MatrixGenerics"       "MatrixModels"         "matrixStats"         
+[268] "mediation"            "memoise"              "metapod"             
+[271] "microbenchmark"       "mime"                 "miniUI"              
+[274] "minqa"                "ModelMetrics"         "modelr"              
+[277] "msigdbr"              "multcomp"             "multcompView"        
+[280] "MuMIn"                "mvtnorm"              "ncdfFlow"            
+[283] "nleqslv"              "nloptr"               "numDeriv"            
+[286] "openCyto"             "openssl"              "openxlsx"            
+[289] "ordinal"              "org.Mm.eg.db"         "otel"                
+[292] "pak"                  "parallelly"           "patchwork"           
+[295] "pbapply"              "pbkrtest"             "pdftools"            
+[298] "PeacoQC"              "pheatmap"             "pillar"              
+[301] "pkgbuild"             "pkgconfig"            "pkgdown"             
+[304] "pkgload"              "plogr"                "plotly"              
+[307] "plyr"                 "png"                  "polyclip"            
+[310] "polynom"              "posterior"            "pracma"              
+[313] "praise"               "prettyunits"          "princurve"           
+[316] "prismatic"            "pROC"                 "processx"            
+[319] "prodlim"              "profvis"              "progress"            
+[322] "progressr"            "promises"             "proto"               
+[325] "proxy"                "ps"                   "purrr"               
+[328] "qpdf"                 "quantreg"             "QuickJSR"            
+[331] "qvalue"               "R.methodsS3"          "R.oo"                
+[334] "R.utils"              "R6"                   "ragg"                
+[337] "randomForest"         "RANN"                 "rappdirs"            
+[340] "RBGL"                 "rbibutils"            "rcmdcheck"           
+[343] "RColorBrewer"         "Rcpp"                 "RcppAnnoy"           
+[346] "RcppArmadillo"        "RcppEigen"            "RcppHNSW"            
+[349] "RcppML"               "RcppParallel"         "RcppProgress"        
+[352] "RcppTOML"             "RCurl"                "Rdpack"              
+[355] "reactable"            "reactR"               "readr"               
+[358] "readxl"               "recipes"              "reformulas"          
+[361] "rematch"              "rematch2"             "remotes"             
+[364] "rentrez"              "reprex"               "reshape2"            
+[367] "restfulr"             "reticulate"           "Rgraphviz"           
+[370] "rhdf5"                "rhdf5filters"         "Rhdf5lib"            
+[373] "RhpcBLASctl"          "Rhtslib"              "rjson"               
+[376] "rlang"                "rmarkdown"            "rngtools"            
+[379] "robmixglm"            "robustbase"           "ROCR"                
+[382] "roxygen2"             "rprojroot"            "RProtoBufLib"        
+[385] "rsm"                  "RSpectra"             "RSQLite"             
+[388] "rstan"                "rstantools"           "rstatix"             
+[391] "rstudioapi"           "rsvd"                 "rtracklayer"         
+[394] "Rtsne"                "rversions"            "rvest"               
+[397] "s2"                   "S4Arrays"             "S4Vectors"           
+[400] "S7"                   "sandwich"             "sass"                
+[403] "ScaledMatrix"         "scales"               "scater"              
+[406] "scattermore"          "scatterpie"           "scran"               
+[409] "sctransform"          "scuttle"              "selectr"             
+[412] "Seqinfo"              "sessioninfo"          "Seurat"              
+[415] "SeuratObject"         "sf"                   "shape"               
+[418] "shiny"                "shinyjs"              "SingleCellExperiment"
+[421] "sitmo"                "slingshot"            "sm"                  
+[424] "snow"                 "SnowballC"            "sourcetools"         
+[427] "sp"                   "spam"                 "SparseArray"         
+[430] "SparseM"              "sparseMatrixStats"    "sparsevctrs"         
+[433] "spatstat.data"        "spatstat.explore"     "spatstat.geom"       
+[436] "spatstat.random"      "spatstat.sparse"      "spatstat.univar"     
+[439] "spatstat.utils"       "SQUAREM"              "StanHeaders"         
+[442] "statmod"              "stringi"              "stringr"             
+[445] "SummarizedExperiment" "sva"                  "sys"                 
+[448] "systemfonts"          "TabulaMurisData"      "tensor"              
+[451] "tensorA"              "testthat"             "textshaping"         
+[454] "TH.data"              "tibble"               "tidyr"               
+[457] "tidyselect"           "tidytree"             "tidyverse"           
+[460] "timechange"           "timeDate"             "tinytex"             
+[463] "TrajectoryUtils"      "treeio"               "tweenr"              
+[466] "tzdb"                 "ucminf"               "UCSC.utils"          
+[469] "umap"                 "units"                "urca"                
+[472] "urlchecker"           "usethis"              "utf8"                
+[475] "uuid"                 "uwot"                 "V8"                  
+[478] "vctrs"                "VGAM"                 "vipor"               
+[481] "viridis"              "viridisLite"          "vroom"               
+[484] "waldo"                "whisker"              "withr"               
+[487] "wk"                   "xfun"                 "xgboost"             
+[490] "XML"                  "xml2"                 "xopen"               
+[493] "xtable"               "XVector"              "yaml"                
+[496] "yulab.utils"          "zip"                  "zoo"                 
+[499] "base"                 "boot"                 "class"               
+[502] "cluster"              "codetools"            "compiler"            
+[505] "datasets"             "foreign"              "graphics"            
+[508] "grDevices"            "grid"                 "KernSmooth"          
+[511] "lattice"              "MASS"                 "Matrix"              
+[514] "methods"              "mgcv"                 "nlme"                
+[517] "nnet"                 "parallel"             "rpart"               
+[520] "spatial"              "splines"              "stats"               
+[523] "stats4"               "survival"             "tcltk"               
+[526] "tools"                "translations"         "utils"  
+
+
+
+pkgs <- c("purrr", "flowCore", "flowWorkspace", "stringr", "ggplot2",
+          "ggcyto", "tidyr", "openCyto", "FlowSOM", "xml2", "CytoNorm",
+          "lubridate", "httr2", "flowGate", "devtools", "plotly",
+          "cyCombine", "CytoML", "Rtsne", "uwot", "dplyr")
+
+installed <- rownames(installed.packages())
+status <- data.frame(Package = pkgs, Installed = pkgs %in% installed)
+print(status)
+cat("\nMissing:\n")
+print(pkgs[!pkgs %in% installed])
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("FlowSOM")
+remotes::install_github("saeyslab/CytoNorm")
+BiocManager::install("flowGate")
+remotes::install_github("biosurf/cyCombine")
+BiocManager::install("CytoML")
+
+
+```
